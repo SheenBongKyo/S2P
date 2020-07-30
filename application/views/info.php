@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-lg-12">
             <?php if ($monthCount > 0 && !empty($headerDate)) { ?>
-                <table class="basic-table border-table supervisor-table fs10">
+                <table class="basic-table border-table supervisor-table" style="font-size: 10px">
                     <colgroup>
                         <col width="1%"/>
                         <col width="3%"/>
@@ -133,6 +133,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <?php } ?>
         </div>
     </div>
+    <div class="fr">
+        <button type="button" class="mt10 btn btn-default mb10" onclick="setFont('up')">폰트 +</button>
+        <button type="button" class="mt10 btn btn-default mb10" onclick="setFont('down')">폰트 -</button>
+        <button type="button" class="mt10 btn btn-default mb10" onclick="history.back()">목록보기</button>
+    </div>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog">
@@ -216,6 +221,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     .datepicker { top: 95px!important }
 </style>
 <script>
+    function setFont(type) {
+        let fontSize = $('.supervisor-table').css('font-size').replace('px', '');
+        if (type == 'up') {
+            if (fontSize <= 20) {
+                $('.supervisor-table').css('font-size', (parseInt(fontSize, 10) + 1)+'px');
+            } else {
+                alert("더 이상 폰트 사이즈를 높일 수 없습니다.");
+            }
+        } else if (type == 'down') {
+            if (fontSize > 1) {
+                $('.supervisor-table').css('font-size', (parseInt(fontSize, 10) - 1)+'px');
+            } else {
+                alert("더 이상 폰트 사이즈를 줄일 수 없습니다.");
+            }
+        }
+    }
     function create(id) {
         const formId = '#blockPainningSupervisorUpdateForm';
         if (id) {
