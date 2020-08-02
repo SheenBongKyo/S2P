@@ -29,7 +29,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div class="row">
         <div class="col-lg-12">
             <?php if ($monthCount > 0 && !empty($headerDate)) { ?>
-                <table class="basic-table border-table supervisor-table" style="font-size: 10px">
+                <table class="supervisor-table" style="font-size: 10px">
                     <colgroup>
                         <col width="1%"/>
                         <col width="3%"/>
@@ -74,26 +74,31 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     <?php foreach ($blockPlanningSupervisorList as &$item) { ?>
                         <tr>
                             <?php if ($gubunRows[$item['bps_gubun']][0] == $item['bps_id']) { ?>
-                                <td rowspan="<?php echo count($gubunRows[$item['bps_gubun']]) * 3?>" class="p0">
+                                <td rowspan="<?php echo count($gubunRows[$item['bps_gubun']]) * 3?>">
                                     <?php echo $item['bps_gubun_rv']?>
                                 </td>
                             <?php } ?>
                             <td rowspan="3"><?php echo $item['bps_field_rv']?></td>
-                            <td rowspan="3" class="p0">
+                            <td rowspan="3">
                                 <?php echo $item['bps_name']?>
                                 <br/>
                                 <button type="buton" class="btn btn-xs btn-warning" onclick="create(<?php echo $item['bps_id']?>)">수정</button>
                                 <button type="buton" class="btn btn-xs btn-danger" onclick="deleted(<?php echo $item['bps_id']?>)">삭제</button>
                             </td>
-                            <td rowspan="3" class="p0"><?php echo $item['bps_level_rv']?></td>
+                            <td rowspan="3"><?php echo $item['bps_level_rv']?></td>
                             <?php foreach ($headerDate as $year => $months) { ?>
                                 <?php foreach ($months as $idx => $month) { ?>
                                 <td class="p0 hg25"></td>
                                 <?php } ?>
                             <?php } ?>
-                            <td rowspan="3" class="p0"><?php echo $item['month_count']?></td>
-                            <td rowspan="3" class="p0"><?php echo $bpsLevelPrice[$item['bps_level']]?></td>
-                            <td rowspan="3"><?php echo sprintf('%0.3f', $bpsLevelPrice[$item['bps_level']] * $item['month_count'])?></td>
+                            <td rowspan="3"><?php echo $item['month_count']?></td>
+                            <?php if ($item['bps_gubun'] != 6) { ?>
+                                <td rowspan="3"><?php echo $bpsLevelPrice[$item['bps_level']]?></td>
+                                <td rowspan="3"><?php echo sprintf('%0.3f', $bpsLevelPrice[$item['bps_level']] * $item['month_count'])?></td>
+                            <?php } else { ?>
+                                <td rowspan="3"></td>
+                                <td rowspan="3"></td>
+                            <?php } ?>
                             <td rowspan="3"><?php echo $item['bps_bigo']?></td>
                         </tr>
                         <tr>
@@ -108,9 +113,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                         ) ? 'table-active' : ''?>
                                     ">
                                         <?php echo ($date == substr($item['bps_start_date'], 0, 7) ? 
-                                            (substr($item['bps_start_date'], 8) == "01" ? '' : '<p class="m0 wd60p hg24 back-white" style="padding-top: 6.2px;">'.(int)substr($item['bps_start_date'], 8).'</p>') : '')?>
+                                            (substr($item['bps_start_date'], 8) == "01" ? '' : '<p class="m0 wd60p hg24 back-white" style="padding-top: 6.4px;">'.(int)substr($item['bps_start_date'], 8).'</p>') : '')?>
                                         <?php echo ($date == substr($item['bps_end_date'], 0, 7) ? 
-                                            (substr($item['bps_end_date'], 8) == $lastDay ? '' : '<p class="m0 wd60p hg24 back-white" style="padding-top: 6.2px; margin-left:40%!important;">'.(int)substr($item['bps_end_date'], 8).'</p>') : '')?>
+                                            (substr($item['bps_end_date'], 8) == $lastDay ? '' : '<p class="m0 wd60p hg24 back-white" style="padding-top: 6.4px; margin-left:40%!important;">'.(int)substr($item['bps_end_date'], 8).'</p>') : '')?>
                                     </td>
                                 <?php } ?>
                             <?php } ?>
@@ -123,7 +128,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <?php } ?>
                         </tr>
                     <?php } ?>
+                    <tr>
+                        <td class="p5" colspan="<?php echo $monthCount + 4?>">총배치 인월수</td>
+                        <td></td>
+                        <td></td>
+                        <td><?php echo sprintf('%0.3f', $totalPlanningInwolsu)?></td>
+                        <td></td>
+                    </tr>
                 </table>
+                <p class="mt15 fc-lg">※ 감리대상공사비 : 158,797,230,000원</p>
+                <p class="fc-lg">○ 법 정 &nbsp; 인 월 수 : 391.655 인월</p>
+                <p>○ 총배치 &nbsp;인월수 : <?php echo sprintf('%0.3f', $totalPlanningInwolsu)?> 인월</p>
+                <p class="fc-lg">
+                    ○ 비상주감리원 인월수(배치율) : 
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    58.748 인월
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    (14.92%)
+                </p>
             <?php } else { ?>
                 <table class="basic-table border-table">
                     <tr>

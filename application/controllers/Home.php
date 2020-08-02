@@ -60,9 +60,11 @@ class Home extends CI_Controller {
             echo validationFail($this->form_validation->error_string());
 
         } else {
+            // 배치 계획표 정보
             $id = $this->input->get('id');
             $this->data['blockPlanning'] = $blockPlanning = $this->block_planning_lib->getBlockPlanningInfoAndPeriodById($id);
-            
+
+            // 표 상단 날짜 계산
             $this->data['headerDate'] = $headerDate = array();
             $this->data['monthCount'] = $monthCount = diffMonthCount($blockPlanning['min_date'], $blockPlanning['max_date']);
             if ($monthCount > 0) {
@@ -74,10 +76,12 @@ class Home extends CI_Controller {
                 $this->data['headerDate'] = $headerDate;
             }
 
+            // 배치된 감리원 목록
             $this->data['blockPlanningSupervisorList'] = 
             $blockPlanningSupervisorList = 
             $this->block_planning_lib->getBlockPlanningSupervisorListAndMonthCountByBpiId($blockPlanning['bpi_id']);
 
+            // 구분 rowspan 설정
             $gubunRows = array();
             foreach ($blockPlanningSupervisorList as $key => $item) {
                 if (!isset($gubunRows[$item['bps_gubun']])) {
@@ -86,6 +90,12 @@ class Home extends CI_Controller {
                 $gubunRows[$item['bps_gubun']][] = $item['bps_id'];
             }
             $this->data['gubunRows'] = $gubunRows;
+
+            // 총배치 인월수
+            $this->data['totalPlanningInwolsu'] = 
+            $totalPlanningInwolsu = 
+            $this->block_planning_lib->getTotalPlanningInwolsu($blockPlanning['bpi_id']);
+
 
             $this->data['bpsGubun'] = $bpsGubun = config_item('bps_gubun');
             $this->data['bpsField'] = $bpsField = config_item('bps_field');

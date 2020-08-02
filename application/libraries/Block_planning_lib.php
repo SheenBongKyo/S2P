@@ -70,7 +70,27 @@ class Block_planning_lib extends Common_lib
     }
 
     // 감리원 삭제
-    public function blockPlanningSupervisorDeleteById($id) {
+    public function blockPlanningSupervisorDeleteById($id) 
+    {
         return $this->CI->Block_planning_supervisor_model->deleteById($id);
     }
+
+    // 총배치 인월수
+    public function getTotalPlanningInwolsu($id) 
+    {
+        $this->_init();
+        $this->select = 'A.*, (TIMESTAMPDIFF(MONTH, A.bps_start_date, A.bps_end_date) + 1) as month_count';
+        $this->where = array('A.bpi_id' => $id, 'A.bps_gubun !=' => 6); // 추가배치 인원 제외
+        $list = $this->CI->Block_planning_supervisor_model->getList($this->getQuery());
+
+        $result = 0;
+        if (!empty($list)) {
+            $levelPrice = config_item('bps_level_price');
+            foreach ($list as $key => $item) {
+                $result += $levelPrice[$item['bps_level']] * $item['month_count'];
+            }
+        }
+        return $result;
+    }
+
 }
