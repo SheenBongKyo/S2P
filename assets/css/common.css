@@ -1,9 +1,15 @@
 table.default-table th, table.default-table td {
-    vertical-align: middle!important;
+    vertical-align: middle;
     text-align: center;
+    font-size: 13px;
 }
+
+table.default-table th button, table.default-table td button {
+    font-size: 12px;
+}
+
 table.default-table th {
-    font-weight: bold!important;
+    font-weight: bold;
 }
 
 .supervisor-card .print-area {
