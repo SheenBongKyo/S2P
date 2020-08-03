@@ -119,7 +119,7 @@
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar" data-sidebarbg="skin6">
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
+        <nav class="sidebar-nav pt10">
             <ul id="sidebarnav">
                 <li class="sidebar-item"> 
                     <a class="sidebar-link sidebar-link" href="<?php echo base_url()?>" aria-expanded="false">
