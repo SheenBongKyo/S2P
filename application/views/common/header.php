@@ -132,7 +132,7 @@
                 <li class="sidebar-item <?php echo $this->uri->segment(1) == 'planning' ? 'selected':''?>"> 
                     <a class="sidebar-link <?php echo $this->uri->segment(1) == 'planning' ? 'active':''?> " href="<?php echo base_url('planning')?>">
                         <i class="fas fa-table mt5"></i>
-                        <span class="hide-menu">감리사 배치 계획표</span>
+                        <span class="hide-menu">감리원 배치 계획표</span>
                     </a>
                 </li>
             </ul>
