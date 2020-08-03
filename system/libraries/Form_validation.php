@@ -88,7 +88,7 @@ class CI_Form_validation {
 	 *
 	 * @var string
 	 */
-	protected $_error_prefix	= '<p>';
+	protected $_error_prefix	= '<p class="mb0">';
 
 	/**
 	 * End tag for error wrapping

@@ -522,7 +522,12 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['bps_gubun'] = array('1' => '총괄', '2' => '분야별', '3' => '비상추', '4' => '신규', '5' => '비평가', '6' => '추가배치');
-$config['bps_field'] = array('A' => '건축', 'C' => '토목', 'F' => '설비');
-$config['bps_level'] = array('1' => '특급', '2' => '고급', '3' => '중급', '4' => '초급');
-$config['bps_level_price'] = array('1' => 1.305, '2' => 1.126, '3' => 1, '4' => 0.664);
+$config['SUCCESS_CODE'] = 200;
+$config['VALIDATION_FAIL_CODE'] = 300;
+$config['FAIL_CODE'] = 301;
+$config['NOT_FOUND_CODE'] = 400;
+
+$config['pls_gubun'] = array('1' => '총괄', '2' => '분야별', '3' => '비상주', '4' => '신규', '5' => '비평가', '6' => '추가배치');
+$config['pls_field'] = array('A' => '건축', 'C' => '토목', 'F' => '설비');
+$config['pls_level'] = array('1' => '특급', '2' => '고급', '3' => '중급', '4' => '초급');
+$config['pls_level_price'] = array('1' => 1.305, '2' => 1.126, '3' => 1, '4' => 0.664);

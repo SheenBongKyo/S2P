@@ -1,11 +1,13 @@
 <?php
-function diffMonthCount($start = "", $end = "")
+function getMonthDiff($start = "", $end = "")
 {
     if ($start && $end) {
-        $startMonth = substr($start, 0, 7);
-        $endMonth = substr($end, 0, 7);
-        $dateDiff = date_diff(new DateTime($startMonth), new DateTime($endMonth));
-        return $monthCount = $dateDiff->y * 12 + $dateDiff->m + 1;
+        $startYear = date('Y', strtotime($start));
+        $startMonth = date('m', strtotime($start));
+        $endYear = date('Y', strtotime($end));
+        $endMonth = date('m', strtotime($end));
+        $monthDiff = (($endYear * 12) + $endMonth) - (($startYear * 12) + $startMonth) + 1;
+        return $monthDiff;
     } else {
         return 0;
     }

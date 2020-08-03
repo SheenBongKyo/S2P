@@ -1,23 +1,34 @@
 $(document).ready(function() {
 	buttonType();
 	inputDatepicker();
+	inputPrice();
 });
 
 ajaxResult = function (resp, form) {
-	if (resp.resultCode == 200) {
-		alert(resp.msg);
-		if (resp.reload) {
-			location.reload();
-		}
-	} else if (resp.resultCode == 201) {
-		alert(resp.msg);
-	} else if (resp.resultCode == 400) {
+	if (resp.resultCode == SUCCESS_CODE) {
+
+		if (resp.msg) alert(resp.msg);
+		if (resp.reload) location.reload();
+
+	} else if (resp.resultCode == FAIL_CODE) {
+
+		if (resp.msg) alert(resp.msg);
+		if (resp.reload) location.reload();
+
+	} else if (resp.resultCode == NOT_FOUND_CODE) {
+
+		if (resp.msg) alert(resp.msg);
+		if (resp.reload) location.reload();
+
+	} else if (resp.resultCode == VALIDATION_FAIL_CODE) {
+
 		$('.alert-danger').remove();
 		if (form) {
 			form.before(resp.msg);
 		} else {
 			alert(resp.msg);
 		}
+
 	}
 }
 
@@ -76,7 +87,7 @@ buttonType = function() {
                         dataType: "json",
                         async: false,
                         success: function (resp) {
-                            ajaxResult(resp);
+                            ajaxResult(resp, form);
                         }
                     });
 				}
@@ -143,6 +154,88 @@ inputDatepicker = function() {
 		language: 'kr',
 		autoclose: true
 	});
+}
+
+inputPrice = function() {
+	$('.input-price').bind('keyup change', function() {
+		const $this = $(this);
+		const value = $this.val();
+		$this.val(value.replace(/[^0-9]/g, "").toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	});
+}
+
+_ajaxGet = function (url, data, rsFunc) {
+	$.ajax({
+		url: url,
+		type: 'GET',
+		data: data ? data : {},
+		dataType: "json",
+		async: false,
+		success: function (resp) {
+			ajaxResult(resp);
+			if (rsFunc) {
+				rsFunc(resp);
+			}
+		}
+	});
+}
+
+_ajaxPost = function (url, data, rsFunc) {
+	$.ajax({
+		url: url,
+		type: 'POST',
+		data: data ? data : {},
+		dataType: "json",
+		async: false,
+		success: function (resp) {
+			ajaxResult(resp);
+			if (rsFunc) {
+				rsFunc(resp);
+			}
+		}
+	});
+}
+
+modalCreate = function(modalId, data) {
+	$('#'+modalId+' form input[type="date"]').val('');
+	$('#'+modalId+' form input[type="hidden"]').val('');
+	$('#'+modalId+' form input[type="text"]').val('');
+	$('#'+modalId+' form input[type="checkbox"]:checked').prop('checked', false);
+	$('#'+modalId+' form input[type="radio"]:checked').prop('checked', false);
+	$('#'+modalId+' form select').val('');
+	$('#'+modalId+' form textarea').val('');
+	$('#'+modalId+' .alert-danger').remove();
+	
+	if (data) {
+		$.each(data, function(key, value){
+			const inputAttr = '#'+modalId+' form [name="'+key+'"]';
+			const input = $(inputAttr);
+			if (input.length > 0) {
+				const tag = input.prop('tagName');
+				if (tag == 'INPUT') {
+					const type = input.attr('type'); 
+					switch (type) {
+						case 'hidden':
+						case 'text':
+						case 'date':
+							input.val(value);
+							break;
+						case 'radio':
+						case 'checkbox':
+							$(inputAttr+'[value="'+value+'"]').prop('checked', true);
+							break;
+					}
+				} else if (tag == 'TEXTAREA') {
+					input.val(value);
+				} else if (tag == 'SELECT') {
+					input.val(value);
+				}
+				input.change();
+			}
+		});
+	}
+
+	$('#'+modalId).modal();
 }
 
 enterFormSubmit = function(e, id) {

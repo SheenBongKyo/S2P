@@ -53,4 +53,11 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['info'] = 'home/info';
+// 감리원 배치 계획표
+$route['planning'] = 'planning/index';
+$route['planning/info'] = 'planning/info';
+$route['planning/info/(:num)'] = 'planning/info';
+$route['planning/getPlanningInfo'] = 'planning/ajax_getPlanningInfo';
+$route['planning/planningRemove'] = 'planning/ajax_planningRemove';
+$route['planning/getPlanningSurpervisorInfo'] = 'planning/ajax_getPlanningSurpervisorInfo';
+$route['planning/planningSupervisorRemove'] = 'planning/ajax_planningSupervisorRemove';

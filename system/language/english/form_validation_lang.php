@@ -37,7 +37,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['form_validation_required']		= '<strong>{field}</strong> 항목은 필수사항 입니다.';
+$lang['form_validation_required']		= '<strong class="fwb">{field}</strong> 항목은 필수사항 입니다.';
 $lang['form_validation_isset']			= 'The {field} field must have a value.';
 $lang['form_validation_valid_email']		= 'The {field} field must contain a valid email address.';
 $lang['form_validation_valid_emails']		= 'The {field} field must contain all valid email addresses.';
