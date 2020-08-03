@@ -98,7 +98,7 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="settings"
+                        <a class="dropdown-item" href="javascript:void(0)" style="margin-top:.5rem"><i data-feather="settings"
                                 class="svg-icon mr-2 ml-1"></i>
                             계정 설정</a>
                         <div class="dropdown-divider"></div>
@@ -119,15 +119,16 @@
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar" data-sidebarbg="skin6">
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav pt10">
+        <nav class="sidebar-nav mt0 pt0">
             <ul id="sidebarnav">
+                <li class="list-divider mt1 mb10"></li>
                 <li class="sidebar-item"> 
                     <a class="sidebar-link sidebar-link" href="<?php echo base_url()?>" aria-expanded="false">
                         <i data-feather="home" class="feather-icon"></i>
                         <span class="hide-menu">Dashboard</span>
                     </a>
                 </li>
-                <li class="list-divider"></li>
+                <li class="list-divider mb10"></li>
                 <!-- <li class="nav-small-cap"><span class="hide-menu">감리사 배치 계획표</span></li> -->
                 <li class="sidebar-item <?php echo $this->uri->segment(1) == 'planning' ? 'selected':''?>"> 
                     <a class="sidebar-link <?php echo $this->uri->segment(1) == 'planning' ? 'active':''?> " href="<?php echo base_url('planning')?>">
