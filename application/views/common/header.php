@@ -1,7 +1,7 @@
 <header class="topbar" data-navbarbg="skin6">
     <nav class="navbar top-navbar navbar-expand-md mb0">
-        <div class="navbar-header tac" data-logobg="skin6">
-            <a href="<?php echo base_url()?>">
+        <div class="navbar-header tac" data-logobg="skin6" style="border-bottom: 1px solid #edf2f9;">
+            <a href="<?php echo base_url()?>" style="line-height: 79px;">
                 <img src="<?php echo base_url()?>assets/images/logo.png" style="width: 80px;"/>
             </a>
         </div>
@@ -119,9 +119,8 @@
     <!-- Sidebar scroll-->
     <div class="scroll-sidebar" data-sidebarbg="skin6">
         <!-- Sidebar navigation-->
-        <nav class="sidebar-nav mt0 pt0">
+        <nav class="sidebar-nav mt10 pt0">
             <ul id="sidebarnav">
-                <li class="list-divider mt1 mb10"></li>
                 <li class="sidebar-item"> 
                     <a class="sidebar-link sidebar-link" href="<?php echo base_url()?>" aria-expanded="false">
                         <i data-feather="home" class="feather-icon"></i>
