@@ -35,7 +35,7 @@ class Planning extends CI_Controller {
             $this->planning_lib->_init();
             $this->data['planning'] = $planning = $this->planning_lib->getPlanningList();
 
-            $this->build->view(__CLASS__.'/index', $this->data);
+            $this->build->view('planning/index', $this->data);
         }
     }
 
@@ -159,7 +159,7 @@ class Planning extends CI_Controller {
             $this->data['plsLevelPrice'] = $plsLevelPrice = config_item('pls_level_price');
             
             $this->build->addJs(base_url('assets/js/printThis.js'));
-            $this->build->view(__CLASS__.'/info', $this->data);
+            $this->build->view('planning/info', $this->data);
         }
     }
 
