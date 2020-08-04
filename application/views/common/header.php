@@ -1,6 +1,7 @@
 <header class="topbar" data-navbarbg="skin6">
     <nav class="navbar top-navbar navbar-expand-md mb0">
         <div class="navbar-header tac" data-logobg="skin6" style="border-bottom: 1px solid #edf2f9;">
+            <a class="nav-toggler waves-effect waves-light d-block d-md-none" href="javascript:void(0)"><i class="ti-close ti-menu"></i></a>
             <a href="<?php echo base_url()?>" style="line-height: 79px;">
                 <img src="<?php echo base_url()?>assets/images/logo.png" style="width: 80px;"/>
             </a>
@@ -107,18 +108,13 @@
                             로그 아웃</a>
                     </div>
                 </li>
-                <!-- ============================================================== -->
-                <!-- User profile and search -->
-                <!-- ============================================================== -->
             </ul>
         </div>
     </nav>
 </header>
 
 <aside class="left-sidebar" data-sidebarbg="skin6">
-    <!-- Sidebar scroll-->
     <div class="scroll-sidebar" data-sidebarbg="skin6">
-        <!-- Sidebar navigation-->
         <nav class="sidebar-nav mt10 pt0">
             <ul id="sidebarnav">
                 <li class="sidebar-item"> 
@@ -137,7 +133,5 @@
                 </li>
             </ul>
         </nav>
-        <!-- End Sidebar navigation -->
     </div>
-    <!-- End Sidebar scroll-->
 </aside>

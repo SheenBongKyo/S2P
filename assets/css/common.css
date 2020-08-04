@@ -4,7 +4,7 @@ table.default-table th, table.default-table td {
     font-size: 13px;
 }
 
-table.default-table th button, table.default-table td button {
+button.btn {
     font-size: 12px;
 }
 
@@ -47,6 +47,8 @@ table.supervisor-table td .back-white {
     -webkit-print-color-adjust: exact!important; 
     color-adjust: exact!important;
 }
+
+.wd-fix { min-width: 1080px!important; }
 
 /* 기본 CSS */
 .fwb { font-weight: bold!important; }

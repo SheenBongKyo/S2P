@@ -1,15 +1,15 @@
 <div class="row mb10">
     <div class="col-7 align-self-center">
-        <h3 class="page-title text-truncate text-dark font-weight-medium mb-1 fwb">감리원 배치 계획표 목록</h3>
+        <h4 class="page-title text-truncate text-dark font-weight-medium mb-1 fwb">감리원 배치 계획표 목록</h4>
     </div>
     <div class="col-5 tar">
-        <button type="button" class="btn btn-outline-primary" onclick="modalCreate('planningModal')">배치 계획표 등록</button>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="modalCreate('planningModal')">계획표 등록</button>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
         <div class="table-responsive">
-            <table class="default-table table">
+            <table class="default-table table wd-fix">
                 <colgroup>
                     <col />
                     <col width="50%"/>
