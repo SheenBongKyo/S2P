@@ -81,7 +81,7 @@
                         <input type="text" class="form-control" name="mem_userid">
                     </div>
                     <div class="form-group">
-                        <label>회원명</label>
+                        <label>회원명(업체명)</label>
                         <input type="text" class="form-control" name="mem_name">
                     </div>
                     <div class="form-group">

@@ -13,7 +13,7 @@ class Account extends CI_Controller {
         $this->load->library(array('account_lib'));
 
         $memLevel = $this->login_lib->getInfo('mem_level');
-        if ($memLevel > 2) {
+        if ($memLevel > 1) {
             alert();
         }
     }

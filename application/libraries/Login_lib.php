@@ -28,9 +28,10 @@ class Login_lib extends Common_lib
         }
     }
 
-    private function loginSessionSave($member) 
+    public function loginSessionSave($member) 
     {
         $this->CI->session->set_userdata('mem_id', $member['mem_id']);
+        $this->CI->session->set_userdata('mem_userid', $member['mem_userid']);
         $this->CI->session->set_userdata('mem_level', $member['mem_level']);
         $this->CI->session->set_userdata('mem_name', $member['mem_name']);
         return $this->CI->Member_model->updateById($member['mem_id'], array('mem_logined' => date('Y-m-d H:i:s')));

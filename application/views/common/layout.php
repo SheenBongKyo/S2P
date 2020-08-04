@@ -25,8 +25,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             
             <?php echo $build->footer ?>
         </div>
-        
     </div>
+
 </body>
 
 </html>

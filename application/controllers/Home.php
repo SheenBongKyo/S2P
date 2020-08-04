@@ -10,12 +10,11 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->allow = array('login');
         $this->data = array();
-        $this->load->library(array());
+        $this->load->library(array('account_lib'));
     }
 
 	public function index()
 	{
-        redirect(base_url('planning'));
         $this->build->view('home', $this->data);
     }
 
@@ -50,4 +49,26 @@ class Home extends CI_Controller {
         redirect(base_url('login'));
     }
     
+    public function ajax_accountSet()
+    {
+        $this->form_validation->set_rules('mem_name', '회원명', 'required');
+        if ($this->form_validation->run() !== false) {
+
+            $post = $this->input->post();
+
+            $rs = $this->account_lib->memberUpdateById($this->login_lib->getInfo('mem_id'), $post);
+            if ($rs) {
+                $member = $this->account_lib->getMemberInfoById($this->login_lib->getInfo('mem_id'));
+                $this->login_lib->loginSessionSave($member);
+                echo successMsg("", true);
+            } else {
+                echo failMsg("계정 설정에 실패하였습니다.");
+            }   
+            
+        } else if ($_POST) {
+
+            echo validationFailMsg($this->form_validation->error_string());
+
+        }
+    }
 }

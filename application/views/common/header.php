@@ -99,14 +99,14 @@
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                        <a class="dropdown-item" href="<?php echo base_url('logout')?>" style="margin-top:.5rem">
-                            <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
-                            로그아웃
+                        <a class="dropdown-item" href="javascript:$('#accountSetModal').modal();" style="margin-top:.5rem">
+                            <i data-feather="settings" class="svg-icon mr-2 ml-1"></i>
+                            계정 설정
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)" style="margin-top:.5rem">
-                            <i data-feather="settings" class="svg-icon mr-2 ml-1"></i>
-                            계정설정
+                        <a class="dropdown-item" href="<?php echo base_url('logout')?>" style="margin-top:.5rem">
+                            <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                            로그 아웃
                         </a>
                     </div>
                 </li>
@@ -134,3 +134,35 @@
         </nav>
     </div>
 </aside>
+
+<div id="accountSetModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">계정 설정</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="accountSetForm" method="post" onkeydown="return enterFormSubmit(event, 'submitBtn')">
+                    <div class="form-group">
+                        <label>아이디</label>
+                        <input type="text" class="form-control" value="<?php echo $this->login_lib->getInfo('mem_userid')?>" disabled>
+                    </div>
+                    <div class="form-group">
+                        <label>회원명(업체명)</label>
+                        <input type="text" class="form-control" name="mem_name" value="<?php echo $this->login_lib->getInfo('mem_name')?>">
+                    </div>
+                    <div class="form-group">
+                        <label>비밀번호</label>
+                        <input type="password" class="form-control" name="mem_password">
+                        <small>※ 계정 수정 시 비밀번호 입력 시에만 수정됩니다.</small>
+                    </div>
+                </form>
+            </div>
+            <div class="form-group text-center">
+                <button type="button" class="btn btn-outline-primary" id="submitBtn" button-type="submit" submit-url="<?php echo base_url('accountSet')?>" form-id="accountSetForm">등록</button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>

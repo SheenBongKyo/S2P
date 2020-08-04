@@ -59,6 +59,9 @@ $route['login'] = 'home/login';
 // 로그아웃
 $route['logout'] = 'home/logout';
 
+// 계정 설정
+$route['accountSet'] = 'home/ajax_accountSet';
+
 // 계정 관리
 $route['account'] = 'account/index';
 $route['account/getMemberInfo'] = 'account/ajax_getMemberInfo';
