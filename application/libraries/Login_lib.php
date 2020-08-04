@@ -41,7 +41,7 @@ class Login_lib extends Common_lib
         return $this->CI->session->userdata('mem_id');
     }
     
-    public function getLoginInfo($key = "")
+    public function getInfo($key = "")
     {
         if ($key) {
             return $this->CI->session->userdata($key);

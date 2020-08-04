@@ -13,6 +13,7 @@ class Common_lib
     public $groupBy;
     public $orderBy;
     public $limit;
+    public $page;
 
     public function __construct()
     {
@@ -30,6 +31,7 @@ class Common_lib
         $this->groupBy = NULL;
         $this->orderBy = NULL;
         $this->limit = NULL;
+        $this->page = NULL;
     }
 
     public function getQuery()
@@ -42,7 +44,8 @@ class Common_lib
             'like' => $this->like,
             'groupBy' => $this->groupBy,
             'orderBy' => $this->orderBy,
-            'limit' => $this->limit
+            'limit' => $this->limit,
+            'page' => $this->page
         );
     }
   

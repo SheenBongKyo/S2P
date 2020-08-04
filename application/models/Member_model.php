@@ -11,6 +11,9 @@ class Member_model extends MY_Model
     public function __construct()
     {   
         parent::__construct();
+        $this->replaceValue = array(
+            'mem_level' => config_item('mem_level')
+        );
     }
 
 }

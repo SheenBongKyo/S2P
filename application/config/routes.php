@@ -55,8 +55,14 @@ $route['translate_uri_dashes'] = FALSE;
 
 // 로그인
 $route['login'] = 'home/login';
+
 // 로그아웃
 $route['logout'] = 'home/logout';
+
+// 계정 관리
+$route['account'] = 'account/index';
+$route['account/getMemberInfo'] = 'account/ajax_getMemberInfo';
+$route['account/memberRemove'] = 'account/ajax_memberRemove';
 
 // 감리원 배치 계획표
 $route['planning'] = 'planning/index';

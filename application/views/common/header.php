@@ -94,7 +94,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="ml-2 d-none d-lg-inline-block">
-                            <span class="text-dark"><?php echo $this->login_lib->getLoginInfo('mem_name')?></span> 
+                            <span class="text-dark"><?php echo $this->login_lib->getInfo('mem_name')?></span> 
                             <i data-feather="chevron-down" class="svg-icon"></i>
                         </span>
                     </a>
@@ -119,20 +119,17 @@
     <div class="scroll-sidebar" data-sidebarbg="skin6">
         <nav class="sidebar-nav mt10 pt0">
             <ul id="sidebarnav">
-                <li class="sidebar-item"> 
-                    <a class="sidebar-link sidebar-link" href="<?php echo base_url()?>" aria-expanded="false">
-                        <i data-feather="home" class="feather-icon"></i>
-                        <span class="hide-menu">Dashboard</span>
-                    </a>
-                </li>
-                <li class="list-divider mb10"></li>
-                <!-- <li class="nav-small-cap"><span class="hide-menu">감리사 배치 계획표</span></li> -->
-                <li class="sidebar-item <?php echo $this->uri->segment(1) == 'planning' ? 'selected':''?>"> 
-                    <a class="sidebar-link <?php echo $this->uri->segment(1) == 'planning' ? 'active':''?> " href="<?php echo base_url('planning')?>">
-                        <i class="fas fa-table mt5"></i>
-                        <span class="hide-menu">감리원 배치 계획표</span>
-                    </a>
-                </li>
+                <?php if (!empty($build->headerNav)) { ?>
+                    <?php foreach ($build->headerNav as $key => $item) { ?>
+                        <li class="sidebar-item <?php echo $this->uri->segment(1) == $item['url'] ? 'selected':''?>"> 
+                            <a class="sidebar-link sidebar-link <?php echo $this->uri->segment(1) == $item['url'] ? 'active':''?>" href="<?php echo base_url($item['url'])?>" aria-expanded="false">
+                                <i class="<?php echo $item['icon']?> mt5"></i>
+                                <span class="hide-menu"><?php echo $item['title']?></span>
+                            </a>
+                        </li>
+                        <li class="list-divider mb10"></li>
+                    <?php } ?>
+                <?php } ?>
             </ul>
         </nav>
     </div>

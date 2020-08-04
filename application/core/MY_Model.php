@@ -65,8 +65,8 @@ class MY_Model extends CI_Model
                         break;
                     case 'limit':
                         if (!empty((int)$value)) {
-                            if (isset($terms['page']) && !empty((int)$terms['page'])) {
-                                $offset = ((int)$terms['page'] - 1) * (int)$value;
+                            if (isset($data['page']) && !empty((int)$data['page'])) {
+                                $offset = ((int)$data['page'] - 1) * (int)$value;
                             } else {
                                 $offset = '';
                             }
@@ -103,6 +103,8 @@ class MY_Model extends CI_Model
         $list = $this->replaceValueFunc($qry->result_array(), __FUNCTION__);
 
         if (isset($data['limit']) && isset($data['page'])) {
+            $limit = $data['limit'];
+            $page = $data['page'];
             unset($data['select']);
             unset($data['limit']);
             unset($data['page']);
@@ -115,6 +117,15 @@ class MY_Model extends CI_Model
             $qry = $this->db->get();
             $rows = $qry->row_array();
             $count = $rows['rownum'];
+            
+            if (!empty($list)) {
+                $num = $count - ($limit * ($page - 1));
+                foreach ($list as &$row) {
+                    $row['_num'] = $num;
+                    $num--;
+                }
+            }
+
             return array('list' => $list, 'count' => $count);
         } else {
             return $list;

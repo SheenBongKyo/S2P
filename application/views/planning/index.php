@@ -25,22 +25,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($planning as $idx => $item) { ?>
+                    <?php if (!empty($planning['list'])) { ?>
+                        <?php foreach ($planning['list'] as $idx => $item) { ?>
+                            <tr>
+                                <td><?php echo $item['_num']?></td>
+                                <td class="tal">
+                                    <a href="<?php echo base_url('planning/info')?>/<?php echo $item['pln_id']?>"><?php echo $item['pln_subject']?></a>
+                                </td>
+                                <td><?php echo $item['pln_created']?></td>
+                                <td>                                
+                                    <button type="buton" class="btn btn-sm btn-outline-warning" onclick="modify(<?php echo $item['pln_id']?>)">수정</button>
+                                    <button type="buton" class="btn btn-sm btn-outline-danger" onclick="remove(<?php echo $item['pln_id']?>)">삭제</button>
+                                </td>
+                            </tr>
+                        <?php } ?>
+                    <?php } else { ?>
                         <tr>
-                            <td><?php echo count($planning) - $idx?></td>
-                            <td class="tal">
-                                <a href="<?php echo base_url('planning/info')?>/<?php echo $item['pln_id']?>"><?php echo $item['pln_subject']?></a>
-                            </td>
-                            <td><?php echo $item['pln_created']?></td>
-                            <td>                                
-                                <button type="buton" class="btn btn-sm btn-outline-warning" onclick="modify(<?php echo $item['pln_id']?>)">수정</button>
-                                <button type="buton" class="btn btn-sm btn-outline-danger" onclick="remove(<?php echo $item['pln_id']?>)">삭제</button>
-                            </td>
+                            <td colspan="4">등록된 감리원 배치 계획표가 없습니다.</td>
                         </tr>
                     <?php } ?>
                 </tbody>
             </table>
         </div>
+        <?php echo $paging?>
     </div>
 </div>
 

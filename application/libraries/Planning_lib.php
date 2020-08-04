@@ -19,18 +19,19 @@ class Planning_lib extends Common_lib
      * ========================================================================================
      */
 
-    // 배치 계획표 목록
-    public function getPlanningList()
+    // 회원 별 배치 계획표 목록
+    public function getPlanningListByMemId($id)
     {
+        $this->where['A.mem_id'] = $id;
         return $this->CI->Planning_model->getList($this->getQuery());
     }
 
-    // 배치 계획표 정보
-    public function getPlanningInfoById($id)
+    // 회원 별 배치 계획표 정보
+    public function getPlanningInfoByIdAndMemId($id, $memId)
     {
         $this->_init();
         $this->select = 'A.*, MIN(B.pls_start_date) as min_date, MAX(B.pls_end_date) as max_date';
-        $this->where = array('A.pln_id' => $id);
+        $this->where = array('A.pln_id' => $id, 'A.mem_id' => $memId);
         $this->join = array('table' => 'planning_supervisor B', 'on' => 'A.pln_id = B.pln_id', 'type' => 'LEFT');
         $this->groupBy = 'A.pln_id';
         return $this->CI->Planning_model->getInfo($this->getQuery());
@@ -159,21 +160,31 @@ class Planning_lib extends Common_lib
      * ========================================================================================
      */
     
-    // 배치 계획표 별 감리원 목록
-    public function getPlanningSupervisorListByPlnId($id)
+    // 배치 계획표 별, 회원 별 감리원 목록
+    public function getPlanningSupervisorListByPlnIdAndMemId($id, $memId)
     {
         $this->_init();
         $this->select = 'A.*, (TIMESTAMPDIFF(MONTH, A.pls_start_date, A.pls_end_date) + 1) as month_count';
-        $this->where = array('A.pln_id' => $id);
+        $this->where = array('A.pln_id' => $id, 'B.mem_id' => $memId);
+        $this->join = array(
+            'table' => 'planning B',
+            'on' => 'A.pln_id = B.pln_id',
+            'type' => 'INNER'
+        );
         $this->orderBy = 'A.pls_gubun ASC, A.pls_level ASC';
         return $this->CI->Planning_supervisor_model->getList($this->getQuery());
     }
 
-    // 감리원 정보
-    public function getPlanningSupervisorInfoById($id)
+    // 회원 별 감리원 정보
+    public function getPlanningSupervisorInfoByIdAndMemId($id, $memId)
     {
         $this->_init();
-        $this->where = array('A.pls_id' => $id);
+        $this->where = array('A.pls_id' => $id, 'B.mem_id' => $memId);
+        $this->join = array(
+            'table' => 'planning B',
+            'on' => 'A.pln_id = B.pln_id',
+            'type' => 'INNER'
+        );
         return $this->CI->Planning_supervisor_model->getInfo($this->getQuery());
     }
 

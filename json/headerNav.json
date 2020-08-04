@@ -1,0 +1,18 @@
+[
+    {
+        "title": "DASHBOARD",
+        "url": "",
+        "icon": "fas fa-home"
+    },
+    {
+        "title": "계정 관리",
+        "url": "account",
+        "icon": "fas fa-address-book",
+        "accessLevel": [1, 2]
+    },
+    {
+        "title": "감리원 배치 계획표",
+        "url": "planning",
+        "icon": "far fa-object-ungroup"
+    }
+]

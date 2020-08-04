@@ -20,6 +20,7 @@ class Planning extends CI_Controller {
         if ($this->form_validation->run() !== false) {
             
             $post = $this->input->post();
+            $post['mem_id'] = $this->login_lib->isLogin();
             $post['pln_price'] = str_replace(',', '', $post['pln_price']);
             $rs = $this->planning_lib->planningUpdateById(element('pln_id', $post), $post);
             if ($rs) {
@@ -34,7 +35,13 @@ class Planning extends CI_Controller {
 
         } else {
             $this->planning_lib->_init();
-            $this->data['planning'] = $planning = $this->planning_lib->getPlanningList();
+            $this->planning_lib->limit = $limit = getLimit();
+            $this->planning_lib->page = $page = getPage();
+            $this->data['planning'] = $planning = $this->planning_lib->getPlanningListByMemId($this->login_lib->isLogin());
+
+            // 페이징
+            $this->load->library('pagination_lib');
+            $this->data['paging'] = $this->pagination_lib->getPaging($planning['count'], $limit, $page);
 
             $this->build->view('planning/index', $this->data);
         }
@@ -49,7 +56,7 @@ class Planning extends CI_Controller {
         }
 
         // 배치 계획표 정보
-        $planning = $this->planning_lib->getPlanningInfoById($id);
+        $planning = $this->planning_lib->getPlanningInfoByIdAndMemId($id, $this->login_lib->isLogin());
         if (empty($planning)) {
             echo notFoundMsg();
             exit;
@@ -63,6 +70,13 @@ class Planning extends CI_Controller {
         $id = (int)$this->input->post('id');
         if (!$id) {
             echo failMsg();
+            exit;
+        }
+
+        // 배치 계획표 정보
+        $planning = $this->planning_lib->getPlanningInfoByIdAndMemId($id, $this->login_lib->isLogin());
+        if (empty($planning)) {
+            echo notFoundMsg();
             exit;
         }
 
@@ -102,7 +116,8 @@ class Planning extends CI_Controller {
 
         } else {
             // 배치 계획표 정보
-            $this->data['planning'] = $planning = $this->planning_lib->getPlanningInfoById($id);
+            $this->data['planning'] = $planning = $this->planning_lib->getPlanningInfoByIdAndMemId($id, $this->login_lib->isLogin());
+            if (empty($planning)) alert();
 
             // 표 상단 날짜 계산
             $this->data['headerDate'] = $headerDate = array();
@@ -119,7 +134,7 @@ class Planning extends CI_Controller {
             // 배치된 감리원 목록
             $this->data['planningSupervisor'] = 
             $planningSupervisor= 
-            $this->planning_lib->getPlanningSupervisorListByPlnId($planning['pln_id']);
+            $this->planning_lib->getPlanningSupervisorListByPlnIdAndMemId($planning['pln_id'], $this->login_lib->isLogin());
 
             // 구분 rowspan 설정
             $gubunRows = array();
@@ -172,8 +187,8 @@ class Planning extends CI_Controller {
             exit;
         }
 
-        // 배치 계획표 정보
-        $planning = $this->planning_lib->getPlanningSupervisorInfoById($id);
+        // 감리원 정보
+        $planning = $this->planning_lib->getPlanningSupervisorInfoByIdAndMemId($id, $this->login_lib->isLogin());
         if (empty($planning)) {
             echo notFoundMsg();
             exit;
@@ -190,7 +205,14 @@ class Planning extends CI_Controller {
             exit;
         }
 
-        // 배치 계획표 삭제
+        // 감리원 정보
+        $planning = $this->planning_lib->getPlanningSupervisorInfoByIdAndMemId($id, $this->login_lib->isLogin());
+        if (empty($planning)) {
+            echo notFoundMsg();
+            exit;
+        }
+
+        // 감리원 삭제
         $rs = $this->planning_lib->planningSupervisorDeleteById($id);
         if ($rs) {
             echo successMsg("", true);
