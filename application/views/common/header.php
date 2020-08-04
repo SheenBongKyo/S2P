@@ -94,18 +94,20 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span class="ml-2 d-none d-lg-inline-block">
-                            <span class="text-dark">현대건설</span> 
+                            <span class="text-dark"><?php echo $this->login_lib->getLoginInfo('mem_name')?></span> 
                             <i data-feather="chevron-down" class="svg-icon"></i>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-dd animated flipInY">
-                        <a class="dropdown-item" href="javascript:void(0)" style="margin-top:.5rem"><i data-feather="settings"
-                                class="svg-icon mr-2 ml-1"></i>
-                            계정 설정</a>
+                        <a class="dropdown-item" href="<?php echo base_url('logout')?>" style="margin-top:.5rem">
+                            <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
+                            로그아웃
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="javascript:void(0)"><i data-feather="power"
-                                class="svg-icon mr-2 ml-1"></i>
-                            로그 아웃</a>
+                        <a class="dropdown-item" href="javascript:void(0)" style="margin-top:.5rem">
+                            <i data-feather="settings" class="svg-icon mr-2 ml-1"></i>
+                            계정설정
+                        </a>
                     </div>
                 </li>
             </ul>

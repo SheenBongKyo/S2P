@@ -16,16 +16,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <div id="main-wrapper" data-theme="light" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full"
         data-sidebar-position="fixed" data-header-position="fixed" data-boxed-layout="full">
 
-        <!-- header -->
         <?php echo $build->header ?>
-
-        <div class="page-wrapper">
+    
+        <div class="<?php echo $build->header ? 'page-wrapper':''?>">
             <div class="container-fluid">
                 <?php echo $build->contents ?>
             </div>
             
             <?php echo $build->footer ?>
         </div>
+        
     </div>
 </body>
 

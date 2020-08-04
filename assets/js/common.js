@@ -5,24 +5,42 @@ $(document).ready(function() {
 });
 
 ajaxResult = function (resp, form) {
+	$('.alert-danger').remove();
 	if (resp.resultCode == SUCCESS_CODE) {
 
-		if (resp.msg) alert(resp.msg);
+		if (resp.msg) {
+			if (resp.msg.indexOf('redirect:') !== -1) {
+				location.href = resp.msg.replace('redirect:', '');
+			} else {
+				alert(resp.msg);
+			}
+		} 
 		if (resp.reload) location.reload();
 
 	} else if (resp.resultCode == FAIL_CODE) {
 
-		if (resp.msg) alert(resp.msg);
+		if (resp.msg) {
+			if (resp.msg.indexOf('redirect:') !== -1) {
+				location.href = resp.msg.replace('redirect:', '');
+			} else {
+				alert(resp.msg);
+			}
+		} 
 		if (resp.reload) location.reload();
 
 	} else if (resp.resultCode == NOT_FOUND_CODE) {
 
-		if (resp.msg) alert(resp.msg);
+		if (resp.msg) {
+			if (resp.msg.indexOf('redirect:') !== -1) {
+				location.href = resp.msg.replace('redirect:', '');
+			} else {
+				alert(resp.msg);
+			}
+		}
 		if (resp.reload) location.reload();
 
 	} else if (resp.resultCode == VALIDATION_FAIL_CODE) {
 
-		$('.alert-danger').remove();
 		if (form) {
 			form.before(resp.msg);
 		} else {

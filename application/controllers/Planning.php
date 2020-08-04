@@ -8,6 +8,7 @@ class Planning extends CI_Controller {
     function __construct()
     {      
         parent::__construct();
+        $this->allow = array();
         $this->data = array();
         $this->load->library(array('planning_lib'));
     }

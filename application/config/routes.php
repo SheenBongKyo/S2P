@@ -53,6 +53,11 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+// 로그인
+$route['login'] = 'home/login';
+// 로그아웃
+$route['logout'] = 'home/logout';
+
 // 감리원 배치 계획표
 $route['planning'] = 'planning/index';
 $route['planning/info'] = 'planning/info';

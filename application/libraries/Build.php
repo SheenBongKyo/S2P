@@ -3,8 +3,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Build {
 
-    private $CI;
-
     private $defaultHead = 'common/head';
     private $defaultHeader = 'common/header';
     private $defaultLayout = 'common/layout';
@@ -14,7 +12,7 @@ class Build {
     public $addCss = array();
     public $addJs = array();
 
-    function __construct()
+    public function __construct()
     {   
         $this->CI =& get_instance();
         $this->setImp('head', $this->defaultHead, array('build' => $this));
@@ -22,7 +20,7 @@ class Build {
         $this->setImp('footer', $this->defaultFooter, array('build' => $this));
     }
 
-    function setImp($var, $url, $data = array())
+    public function setImp($var, $url, $data = array())
     {
         if ($url) {
             $this->{$var} = $this->CI->load->view($url, $data, true);
@@ -31,17 +29,17 @@ class Build {
         }
     }
 
-    function addCss($cssUrl) {
+    public function addCss($cssUrl) {
         $this->addCss[] = $cssUrl;
         $this->setImp('head', $this->defaultHead, array('build' => $this));
     }
 
-    function addJs($jsUrl) {
+    public function addJs($jsUrl) {
         $this->addJs[] = $jsUrl;
         $this->setImp('head', $this->defaultHead, array('build' => $this));
     }
 
-    function view($contentsUrl, $data = array()) 
+    public function view($contentsUrl, $data = array()) 
     {
         $this->setImp('contents', $contentsUrl, $data);
         $this->CI->load->view($this->defaultLayout, array('build' => $this));

@@ -132,7 +132,7 @@ class Planning_lib extends Common_lib
         } else {
             return 0;
         }
-        return ($price - $b) / ($a - $b) * ($c - $d) + $d;
+        return round(($price - $b) / ($a - $b) * ($c - $d) + $d, 3);
     }
 
     // 비상주감리원 인월수
