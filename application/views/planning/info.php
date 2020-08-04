@@ -3,7 +3,7 @@
         <h4 class="page-title text-truncate text-dark font-weight-medium mb-1 fwb">감리원 배치 계획표 정보</h4>
     </div>
     <div class="col-5 tar">
-        <button type="button" class="mt10 btn btn-sm btn-outline-secondary mb10" onclick="history.back()">목록보기</button>
+        <button type="button" class="btn btn-sm btn-outline-secondary" onclick="history.back()">목록보기</button>
     </div>
 </div>
 <div class="card supervisor-card">
