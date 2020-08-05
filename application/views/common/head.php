@@ -6,7 +6,7 @@
     <title>S2P 프로젝트</title>
     
     <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url()?>assets/theme/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url()?>assets/images/logo.png">
 
     <!-- Theme CSS -->
     <link href="<?php echo base_url()?>assets/theme/extra-libs/c3/c3.min.css" rel="stylesheet">
